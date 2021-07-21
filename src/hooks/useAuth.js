@@ -9,13 +9,14 @@ import  { userAuth } from 'firebase/firebaseConfig'
 const useAuth = () => {
   const [isLoggedIn, setIsLoggedIn ] = useState(false)
   const [checking, setChecking ] = useState(true)
+  const [ uid, setUid] = useState(0)
   const history = useHistory()
   const dispatch = useDispatch()
   
   useEffect(() => {
     const unregisterAuthObserver = userAuth.onAuthStateChanged(user => {
       setIsLoggedIn(!!user)
-      !user && history.push('/login') 
+      !user ? history.push('/login') :  setUid(user.uid)
     })
     return () => unregisterAuthObserver()
   }, [])
@@ -29,12 +30,12 @@ const useAuth = () => {
     dispatch(userLogout())
   }
 
-  const userUid = userAuth.currentUser ? userAuth.currentUser.uid :0
+  
   return {
     checking,
     isLoggedIn,
     logout,
-    userUid
+    uid
   }
 }
 
