@@ -11,7 +11,7 @@ const useAuth = () => {
   const [checking, setChecking ] = useState(true)
   const history = useHistory()
   const dispatch = useDispatch()
-
+  
   useEffect(() => {
     const unregisterAuthObserver = userAuth.onAuthStateChanged(user => {
       setIsLoggedIn(!!user)
@@ -29,11 +29,12 @@ const useAuth = () => {
     dispatch(userLogout())
   }
 
+  const userUid = userAuth.currentUser.uid ? userAuth.currentUser.uid :0
   return {
     checking,
     isLoggedIn,
     logout,
-    userUid:userAuth.currentUser.uid|0
+    userUid
   }
 }
 
