@@ -67,8 +67,8 @@ export const addUser = async () => {
     typeOfJob:'',
     DesiredSalary:'',
     availabilityToTravel:false,
-    availabilityForRemoteWork:'',
-    immediateIncorporation:''
+    availabilityForRemoteWork:false,
+    immediateIncorporation:false
   }
   const docNuweCard ={
     challengePoints:'',

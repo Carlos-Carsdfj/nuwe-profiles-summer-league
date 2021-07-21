@@ -33,7 +33,7 @@ const useAuth = () => {
     checking,
     isLoggedIn,
     logout,
-    userUid:userAuth.currentUser.uid
+    userUid:userAuth.currentUser.uid??0
   }
 }
 
