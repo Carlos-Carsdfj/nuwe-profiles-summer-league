@@ -1,5 +1,9 @@
-export const SKILLS ={
-  JAVASCRIPT:'javascript',
-  
+export const SKILLS =[
+  {
 
-}
+  },
+  {
+
+  }
+
+]
