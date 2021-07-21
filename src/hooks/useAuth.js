@@ -29,7 +29,7 @@ const useAuth = () => {
     dispatch(userLogout())
   }
 
-  const userUid = userAuth.currentUser.uid ? userAuth.currentUser.uid :0
+  const userUid = userAuth.currentUser ? userAuth.currentUser.uid :0
   return {
     checking,
     isLoggedIn,
