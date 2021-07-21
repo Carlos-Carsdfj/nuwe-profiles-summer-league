@@ -8,7 +8,7 @@ import './App.css'
 
 function App() {
   const history = useHistory()
-  const {  checking, isLoggedIn, logout, userUid} = useAuth()
+  const {  checking, isLoggedIn, logout, uid} = useAuth()
   
   return (<>{
     checking 
@@ -18,7 +18,7 @@ function App() {
           isLoggedIn && <button onClick={() => logout()} > cerrar sesion </button>
         }
         <button onClick={() => history.push('/users')} >usuarios</button>
-        <button onClick={() => history.push(`/profile/${userUid}`)} >mi perfil</button>
+        <button onClick={() => history.push(`/profile/${uid}`)} >mi perfil</button>
         </header>
 
         <Switch>
