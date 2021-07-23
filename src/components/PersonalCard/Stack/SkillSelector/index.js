@@ -1,23 +1,23 @@
 /* eslint-disable react/prop-types */
 import { useState } from 'react'
+import {  useDispatch } from 'react-redux'
 import useSkills from 'hooks/useSkills'
+import { addNewStack } from 'reducer/actions'
 import './SkillSelector.css'
 
-export default function SkillSelecter({closedComponent}) {
-  const { skills, searchSkills, textFilter, selectedSkills, selectSkill, quitSkill } = useSkills()
+export default function SkillSelecter({closedComponent , skillsPack}) {
+  const { skills, searchSkills, textFilter, selectedSkills, selectSkill, quitSkill } = useSkills(skillsPack)
   const [ visible,  setVisible ] = useState(false)
   const styleDisplay = visible?  {display:''} : {display:'none'}
-  
+  const dispatch = useDispatch() 
   const addSkill = (selected) =>{
     selectSkill(selected)
     setVisible(false)
   }
   const submit = (ev) => {
     ev.preventDefault()
-    //mandar al servidor
-    //guardar en el redux
-    //cerrar ventana
-    closedComponent()
+    dispatch(addNewStack(selectedSkills))
+      .then(closedComponent())
   }
 
   return (
@@ -37,10 +37,10 @@ export default function SkillSelecter({closedComponent}) {
           <div className='selected-skills'>
             {
               selectedSkills.map(( skill, index )=>{
-                return <span key={index} >
+                return <div key={index}  className='selected-skills-item'>
                   {skill.name}
-                  <button onClick={() =>quitSkill(skill) } className='quit-skill-button' >X</button>
-                </span>})
+                  <span onClick={() =>quitSkill(skill) } className='quit-skill-button' >X</span>
+                </div>})
             }
             <input value={textFilter} onChange={(ev) => searchSkills(ev.target.value)} className='search-skill-input' onSelect={() =>{setVisible(true)}}  />
           </div>

@@ -2,16 +2,32 @@ import React from 'react'
 import ReactDOM from 'react-dom'
 import { BrowserRouter as Router } from 'react-router-dom'
 import { Provider } from 'react-redux'
+import { ThemeProvider } from '@material-ui/styles'
+import { createTheme } from '@material-ui/core/styles'
 import './index.css'
 import App from './App'
 import reportWebVitals from './reportWebVitals'
 import store from './reducer/store'
-
+const theme = createTheme({
+  
+  palette: {
+    primary:  {
+      main: '#29b6f6',
+      light: '#bbdefb'
+    },
+    secondary: {
+      main: '#1976d2',
+    },
+  }
+  
+})
 ReactDOM.render(
   <React.StrictMode>
     <Router>
       <Provider store={store}>
-        <App />
+        <ThemeProvider theme={theme}>  
+          <App />
+        </ThemeProvider>  
       </Provider>
     </Router>
   </React.StrictMode>,

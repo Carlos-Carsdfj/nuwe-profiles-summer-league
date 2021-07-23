@@ -1,8 +1,20 @@
 import { TYPES} from './types'
-import { getUser, logout } from 'firebase/firebaseConfig'
+import {
+  addPersonalCard,
+  addWorkCard,
+  getPublicInformation,
+  getPersonalCard,
+  getUser,
+  logout,
+  addNewsCards
+} from 'firebase/firebaseConfig'
 
 
-
+/*************************** */
+/**                          */
+/**      authAction         */
+/**                          */
+/*************************** */
 
 export const userLogin = () => {
   return async (dispatch) => {
@@ -22,3 +34,99 @@ export const userLogout = () => {
     })
   }
 }
+/***************** */
+
+
+/*************************** */
+/**                          */
+/**  personalCardAction     */
+/**                          */
+/*************************** */
+export const addNewPersonalCard = (personalCard) => {
+  return async (dispatch) => {
+    const card = await addPersonalCard(personalCard)
+    if(card){
+      dispatch({
+        type: TYPES.ADD_NEW_PERSONAL_CARD,
+        payload:personalCard
+      })
+    }
+  }
+}
+export const addNewStack = (stack) => {
+  return async (dispatch) => {
+    const stackUpdate = await addPersonalCard({stack})
+    if(stackUpdate){
+      const card = await getPersonalCard()
+      dispatch({
+        type: TYPES.ADD_NEW_PERSONAL_CARD,
+        payload:card.personalCard
+      })
+
+    }
+
+    
+  }
+}
+/***************** */
+
+/*************************** */
+/**                          */
+/**  addAllCardsAction       */
+/**                          */
+/*************************** */
+export const addNewAllCards = (uid) => {
+  return async (dispatch) => {
+    const card = await addNewsCards(uid)
+    if(card){
+      dispatch(getCards(uid))
+    }
+  }
+}
+/***************** */
+/*************************** */
+/**                          */
+/**     workCardAction       */
+/**                          */
+/*************************** */
+export const addNewWorkCard = (workCard) => {
+  return async (dispatch) => {
+    const card = await addWorkCard(workCard)
+    if(card){
+      dispatch({
+        type: TYPES.ADD_NEW_WORK_CARD,
+        payload:workCard
+      })
+    }
+  }
+}
+/***************** */
+/*************************** */
+/**                          */
+/**  AllPublicInformation     */
+/**                          */
+/*************************** */
+export const getCards = (uid) => {
+  return async (dispatch) => {
+    const cards = await getPublicInformation(uid)
+    if(cards){
+      dispatch({
+        type: TYPES.ADD_NEW_PERSONAL_CARD,
+        payload:cards.personal
+      })
+      dispatch({
+        type: TYPES.ADD_NEW_NUWE_CARD,
+        payload:cards.nuwe
+      })
+      dispatch({
+        type: TYPES.ADD_NEW_WORK_CARD,
+        payload:cards.work
+      })
+    }
+    else(
+      dispatch(addNewAllCards(uid))
+      
+    )
+  }
+}
+/***************** */

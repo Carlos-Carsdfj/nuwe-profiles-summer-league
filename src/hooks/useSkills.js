@@ -17,7 +17,13 @@ const useSkills = ( initialSkill = []) => {
       : SKILLS_PACKS
     setSkills(foundSkills)
   }, [textFilter])
+
   useEffect(() => {
+    if(!(initialSkill[0] && initialSkill[0].name) ){
+      setSelectedSkills(initialSkill.filter(skill =>{
+        skill.name
+      }))
+    }
   }, [])
 
   const searchSkills = (search) =>{
@@ -31,12 +37,11 @@ const useSkills = ( initialSkill = []) => {
     setSelectedSkills(prev =>{
       let temp = prev.concat(skill)
       return temp.filter( (toFilter, index) =>{
-        return temp.indexOf(toFilter) === index
+        return temp.indexOf(toFilter) === index && toFilter.name
       }) 
     })
   } 
   const quitSkill = (skillToQuit) => {
-    console.log(skillToQuit.name)
     setSelectedSkills(prev =>{
       return prev.filter( (toFilter) =>{
         return toFilter.name !== skillToQuit.name

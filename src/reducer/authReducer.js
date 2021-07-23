@@ -9,7 +9,7 @@ const user =
   photoURL:null
 }
 
-export const reducer = ( state = user, action ) => {
+const reducer = ( state = user, action ) => {
   switch (action.type) {
   case TYPES.LOGIN:
     return{
@@ -19,12 +19,9 @@ export const reducer = ( state = user, action ) => {
     }
   case TYPES.LOGOUT:
     return user
-      
-    
-  case TYPES.MODIFIC:
-    return state
   default:
     return state
   }
 }
 
+export default reducer
