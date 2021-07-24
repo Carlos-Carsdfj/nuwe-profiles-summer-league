@@ -1,7 +1,7 @@
 import firebase from 'firebase/app'
 import 'firebase/auth'
 import 'firebase/firestore'
-
+import { dataStructures } from 'constSetting'
 const firebaseConfig = {
   apiKey: 'AIzaSyDHhaYjeD8SSPAbGSqy0k8bofBVc_J_gRw',
   authDomain: 'first-challenge-nuwe.firebaseapp.com',
@@ -21,6 +21,7 @@ if (!firebase.apps.length) {
 
 export const db = firebase.firestore()
 export const userAuth = firebase.auth()
+
 
 
 export const  getData = async () =>{
@@ -50,62 +51,39 @@ export const logout = () => {
 }
 
 
-export const addUser = async () => {
+export const addNewsCards = async (uid) => {
   const user = userAuth.currentUser
-
-  const docPersonal ={
-    displayName:user.displayName,
-    photoURL:user.photoURL,
-    description:'',
-    ubicación:'',
-    headerImage:'',
-    stack:[]
+  if(uid !== user.uid ){
+    return false
   }
-  const docWorkCard ={
-    workinginformation:'',
-    placeToWork:'',
-    typeOfJob:'',
-    DesiredSalary:'',
-    availabilityToTravel:false,
-    availabilityForRemoteWork:false,
-    immediateIncorporation:false
-  }
-  const docNuweCard ={
-    challengePoints:'',
-    topSkillScore:{
-      javascript:1000,
-      reactjs:1000,
-      nextjs:1000,
-      nodejs:1000,
-      python:1000,
-    },
-    softSkills:{
-      Adaptability:0,
-      ProblemsResolution:0,
-      teamwork:0,
-      creativeThinking:0
-    }
-
-  }
-
+ 
+  const { DATA_STRUCTURES } = dataStructures({
+    displayName :user.displayName, 
+    photoUrl:user.photoURL,
+    emailAddress: user.email,
+    uid:user.uid
+  })
   try {
+    
     await db.collection('users')
       .doc(user.uid) 
       .collection('publicInformation')
-      .doc('user')
-      .set(docPersonal)
+      .doc('personal')
+      .set(DATA_STRUCTURES.docPersonal)
       
     await db.collection('users')
       .doc(user.uid) 
       .collection('publicInformation')
       .doc('work')
-      .set(docWorkCard)
+      .set(DATA_STRUCTURES.docWorkCard)
   
     await db.collection('users')
       .doc(user.uid) 
       .collection('publicInformation')
       .doc('nuwe')
-      .set(docNuweCard)
+      .set(DATA_STRUCTURES.docNuweCard)
+    await db.collection('uidUser')
+      .add(DATA_STRUCTURES.docUserUid)
     return true
   } catch (error) {
     console.log(error)
@@ -116,21 +94,122 @@ export const addUser = async () => {
 
 
 export const  getPublicInformation = async (uid) => {
-
   try {
     const querySnapshot = await db.collection(`users/${uid}/publicInformation`).get()
- 
     const public_information ={
-      user:querySnapshot.docs.find(doc => doc.id === 'user').data(),
+      personal:querySnapshot.docs.find(doc => doc.id === 'personal').data(),
       work:querySnapshot.docs.find(doc => doc.id === 'work').data(),
       nuwe:querySnapshot.docs.find(doc => doc.id === 'nuwe').data()
     } 
     return public_information
   } catch (error) {
     console.log(error)
+    return false
   }
-     
-  
+}
 
+
+
+export const addPersonalCard = async ( personalCard ) => {
+  const user = userAuth.currentUser
+
+  const docPersonal ={
+    
+    ...personalCard
+  }
+  try {
+    await db.collection('users')
+      .doc(user.uid) 
+      .collection('publicInformation')
+      .doc('personal')
+      .update(docPersonal)
+
+    return true
+  } catch (error) {
+    console.log(error)
+    return false
+  }
+}
+
+
+export const addWorkCard = async ( workCard ) => {
+  const user = userAuth.currentUser
+  const docWorkCard ={
+    ...workCard
+  }
+  try {
+    await db.collection('users')
+      .doc(user.uid) 
+      .collection('publicInformation')
+      .doc('work')
+      .update(docWorkCard)
+    return true
+  } catch (error) {
+    console.log(error)
+    return false
+  }
+}
+
+export const  getPersonalCard = async () => {
+  try {
+    const querySnapshot = await db.collection(`users/${userAuth.currentUser.uid}/publicInformation`).get()
+    const public_information ={
+      personalCard:querySnapshot.docs.find(doc => doc.id === 'personal').data(),
+    } 
+    return public_information
+  } catch (error) {
+    console.log(error)
+    return false
+  }
+}
+export const  getWorkCard = async () => {
+  try {
+    const querySnapshot = await db.collection(`users/${userAuth.currentUser.uid}/publicInformation`).get()
+    const public_information ={
+      work:querySnapshot.docs.find(doc => doc.id === 'work').data(),
+    } 
+    return public_information
+  } catch (error) {
+    console.log(error)
+    return false
+  }
+}
+export const  getNuweCard = async () => {
+  try {
+    const querySnapshot = await db.collection(`users/${userAuth.currentUser.uid}/publicInformation`).get()
+    const public_information ={
+      nuwe:querySnapshot.docs.find(doc => doc.id === 'nuwe').data()
+    } 
+    return public_information
+  } catch (error) {
+    console.log(error)
+    return false
+  }
+}
+
+
+export const checkUser = (uid) =>{
+  const userUid = userAuth.currentUser.uid
+  if(userUid === uid ){
+    return true
+  } 
+  return false
+}
+
+
+export const getAlluser = async () =>{
+
+  let users =[]
+  try {
+    const querySnapshot = await db.collection('uidUser').get()
+    querySnapshot.forEach(doc=>{
+      users.push(doc.data())
+    })
+     
+    return users
+  } catch (error) {
+    console.log(error)
+    return false
+  }
 
 }

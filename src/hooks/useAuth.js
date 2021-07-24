@@ -16,7 +16,12 @@ const useAuth = () => {
   useEffect(() => {
     const unregisterAuthObserver = userAuth.onAuthStateChanged(user => {
       setIsLoggedIn(!!user)
-      !user ? history.push('/login') :  setUid(user.uid)
+      if(!user ){
+        setUid(0) && history.push('/login') 
+        
+      }else{
+        setUid(user.uid)
+      }
     })
     return () => unregisterAuthObserver()
   }, [])

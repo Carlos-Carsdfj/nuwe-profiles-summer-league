@@ -17,7 +17,7 @@ const firebaseAuthConfig = {
       requireDisplayName: false,
     },
   ],
-  signInSuccessUrl: '/profile',
+  //signInSuccessUrl: '/profile',
   credentialHelper: 'none',
   callbacks: {
     signInSuccessWithAuthResult: () => false,

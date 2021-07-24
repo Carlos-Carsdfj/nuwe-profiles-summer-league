@@ -1,38 +1,34 @@
-import {  getPublicInformation } from 'firebase/firebaseConfig'
-import { useParams } from 'react-router'
-import React from 'react'
-import { useSelector } from 'react-redux'
 import { useEffect, useState } from 'react'
+import { useParams } from 'react-router'
+import { useDispatch } from 'react-redux'
+import { getCards, } from 'reducer/actions'
+import { checkUser } from 'firebase/firebaseConfig'
+import PersonalCard from 'components/PersonalCard'
+import './Profile.css'
 
 export default function Profile() {
   const [checking, setChecking ] = useState(true)
+  const dispatch = useDispatch()
   const { uid } = useParams()
-  const state = useSelector(state => state)
+
+  const isUid = checkUser(uid)
 
   useEffect(() => {
-    getPublicInformation(uid)
-      .then( res =>{
-        console.log(res)
+    setChecking(true)
+    dispatch(getCards(uid))
+      .then(
         setChecking(false)
-      })
-    
-  }, [])
+      )
+  }, [isUid])
 
-  const handler = () =>{
-    //addUser().then(resp => console.log('was the data created:',resp))
-  }
-  
   return (
-    <div>
+    <div className='profile-page'>
       { checking? <h2>Loading ...</h2>
         :<>
-          <h1>profile</h1>
-          <h2>nombre: {state.displayName}</h2>
-          <h2>usuario: {state.uid}</h2>
-          <img src={state.photoURL} />
-          <button onClick={handler}>Actualizar</button>
+          <PersonalCard isUid={isUid}/>
         </>
       }
+     
     </div>
     
       

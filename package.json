@@ -3,9 +3,16 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "@fontsource/roboto": "^4.5.0",
+    "@material-ui/core": "^4.12.2",
+    "@material-ui/data-grid": "^4.0.0-alpha.34",
+    "@material-ui/icons": "^4.11.2",
+    "@material-ui/lab": "^4.0.0-alpha.60",
+    "@material-ui/styles": "^4.11.4",
     "@testing-library/jest-dom": "^5.11.4",
     "@testing-library/react": "^11.1.0",
     "@testing-library/user-event": "^12.1.10",
+    "dotenv": "^10.0.0",
     "firebase": "^8.7.1",
     "firebaseui": "^4.8.1",
     "react": "^17.0.2",
@@ -14,8 +21,11 @@
     "react-redux": "^7.2.4",
     "react-router-dom": "^5.2.0",
     "react-scripts": "4.0.3",
+    "react-window": "^1.8.6",
     "redux": "^4.1.0",
+    "redux-devtools-extension": "^2.13.9",
     "redux-thunk": "^2.3.0",
+    "unsplash-js": "^7.0.15",
     "web-vitals": "^1.0.1"
   },
   "scripts": {
