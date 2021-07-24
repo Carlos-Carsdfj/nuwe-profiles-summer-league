@@ -1,65 +1,45 @@
-import { Switch, Route, useHistory } from 'react-router-dom'
-import { Grid, Tabs, Tab } from '@material-ui/core'
-import { useState } from 'react'
+import { Switch, Route } from 'react-router-dom'
+import {makeStyles } from '@material-ui/core'
+//import { useState } from 'react'
 import PrivateRoutes from 'routes/PrivateRoutes'
 import Login from './pages/login'
 import Profile from './pages/profile'
 import Users from './pages/userList'
 import useAuth from 'hooks/useAuth'
 import '@fontsource/roboto'
+import Navbar from 'components/Navbar'
+
+const drawerWidth = 240
+const useStyles = makeStyles((theme) => ({
+  root: {
+    display: 'flex',
+  },  
+  content: {
+    flexGrow: 1,
+    padding: theme.spacing(3),
+  },
+  toolbar: theme.mixins.toolbar,
+  drawerPaper: {
+    width: drawerWidth,
+  },
+  
+})
+)
 
 function App() {
-  const history = useHistory()
-  const {  checking, isLoggedIn, logout, uid} = useAuth()
-  const [value, setValue] = useState(0)
-  const handleChange = (event, newValue) => {
-    setValue(newValue)
-  }
+  const classes = useStyles()
+  const {  checking, isLoggedIn, uid, logout } = useAuth()
   return (
-    <Grid 
-      container
-      direction="row"
-      height="100%" 
-      spacing={0}
-      justifyContent="center"
-      alignItems="flex-start"      
-    >{
+    <div className={classes.root}>
+      <div className={classes.toolbar} />
+      {
         checking 
           ? <h2>loading... 🛠 </h2> 
           :(<>
-            <Grid
-              item
-              height='100%'
-              xs={2}
-            >
-              <Tabs
-                orientation="vertical"
-                variant="scrollable"
-                height='100%'
-                aria-label="Vertical tabs example"
-                value={value}
-                onChange={handleChange} 
-                indicatorColor="primary"
-                textColor="primary" 
-              >{
-                  isLoggedIn && <Tab onClick={() => logout()} label={'cerrar sesion'} />
-                }
-                <Tab  onClick={() => history.push('/users')} label={'Usuarios'}/>
-                <Tab  onClick={() => history.push(`/profile/${uid}`)} label="perfil" />
-              
-              </Tabs>
-            </Grid>
-            <Grid
-              container
-              item
-              height='80%'
-              direction="column"
-              xs={9}
-              justifyContent="center"
-              alignItems="center"
-              spacing={1}
-              
-            >
+            <Navbar uid={uid} 
+              isLoggedIn={isLoggedIn} 
+              logout={logout}/>
+            <main className={classes.content}>
               <Switch>
                 <PrivateRoutes path='/users' isLoggedIn={isLoggedIn}>
                   <Users/>
@@ -71,9 +51,10 @@ function App() {
                   <Login/>
                 </Route>
               </Switch>
-            </Grid>
+            </main>  
+            
           </>)
-      } </Grid > 
+      } </div > 
   )
 }
 

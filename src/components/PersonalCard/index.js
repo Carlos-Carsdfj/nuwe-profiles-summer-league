@@ -48,7 +48,7 @@ export default function PersonalCard({ isUid }) {
       <Card
       >
         <HeaderImage isUid={isUid} />
-        <Avatar alt="Cindy Baker" src={personalState.photoURL}  className={classes.avatar}/>
+        <Avatar  alt="profile picture " src={personalState.photoURL}  className={classes.avatar}/>
         <InfoPersonal isUid={isUid} />
         <CardActions className={classes.card_action}>
           <Stack isUid={isUid} />

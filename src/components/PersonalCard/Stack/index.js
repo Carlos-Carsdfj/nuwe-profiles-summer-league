@@ -68,7 +68,7 @@ export default function Stack({ isUid }) {
       }
       {
         stackState && stackState.map(( skill, index ) =>{
-          return <Avatar key={index} src={skill.imgUrl}  />
+          return <Avatar key={index} variant="rounded" src={skill.imgUrl} alt={skill.name} />
         }  
         )
       }
