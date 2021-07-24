@@ -60,9 +60,9 @@ export const addNewsCards = async (uid) => {
   const { DATA_STRUCTURES } = dataStructures({
     displayName :user.displayName, 
     photoUrl:user.photoURL,
-    emailAddress: user.email 
+    emailAddress: user.email,
+    uid:user.uid
   })
- 
   try {
     
     await db.collection('users')
@@ -82,6 +82,8 @@ export const addNewsCards = async (uid) => {
       .collection('publicInformation')
       .doc('nuwe')
       .set(DATA_STRUCTURES.docNuweCard)
+    await db.collection('uidUser')
+      .add(DATA_STRUCTURES.docUserUid)
     return true
   } catch (error) {
     console.log(error)
@@ -192,4 +194,22 @@ export const checkUser = (uid) =>{
     return true
   } 
   return false
+}
+
+
+export const getAlluser = async () =>{
+
+  let users =[]
+  try {
+    const querySnapshot = await db.collection('uidUser').get()
+    querySnapshot.forEach(doc=>{
+      users.push(doc.data())
+    })
+     
+    return users
+  } catch (error) {
+    console.log(error)
+    return false
+  }
+
 }

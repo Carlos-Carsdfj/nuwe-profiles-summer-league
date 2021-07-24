@@ -1,6 +1,7 @@
 /* eslint-disable react/prop-types */
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import {  useSelector } from 'react-redux'
+import Skeleton from '@material-ui/lab/Skeleton'
 import LocationIcon from '@material-ui/icons/LocationOnOutlined'
 import InfoEditor from 'components/PersonalCard/InfoPersonal/InfoEditor'
 import SettingsIcon from '@material-ui/icons/Settings'
@@ -26,49 +27,61 @@ const useStyles = makeStyles((theme) => ({
     '&:hover':{
       cursor:'pointer',
     } 
-  }  
+  },
+  skeleto:{
+    margin:'auto'
+
+  }    
 }))
 
 export default function InfoPersonal({ isUid }) {
   const [ visible,  setVisible ] = useState(false)
+  const [ checking, setChecking ] = useState(true)
   const personalState = useSelector(state => state.personalCard)
   const classes = useStyles()
 
+  useEffect(() => {
+    setChecking(true)
+    personalState && setChecking(false)
+  }, [personalState])
   const toggler = () =>{
     setVisible(prev => !prev)
   }
-  return (
-    <CardContent className={classes.card_content} >
-      <Typography gutterBottom variant="h5" component="h2">
-        {personalState.displayName}
-      </Typography>
-      <Typography variant="body2" gutterBottom  component="h4">
-        {personalState.email} |{personalState.phoneNumber}
-      </Typography>
-      <Typography variant="body2" color="textSecondary" component="p">
-        {personalState.description}
-      </Typography>
-      <Box display="flex"
-        alignItems="center"
-        justifyContent="center"
-        flexWrap="nowrap"
-      >
-        <LocationIcon/>
-        <Typography variant="body2" color="textSecondary" component="p">
-          {personalState.ubication}
+  return (<>{
+    checking ? <Skeleton  animation="wave" />
+      :
+      <CardContent className={classes.card_content} >
+        <Typography gutterBottom variant="h5" component="h2">
+          {personalState.displayName}
         </Typography>
-      </Box>
-      <Typography gutterBottom variant="h5" component="h2">
-        {personalState.lookForAJob}
-      </Typography>
-      {visible && <InfoEditor closedComponent={toggler} Info={personalState} />}
-      {
-        isUid && <Tooltip title="Setting"  className={classes.tooltip}  >
-          <IconButton onClick={toggler}>
-            <SettingsIcon/>
-          </IconButton>
-        </Tooltip>
-      }
-    </CardContent>
-  )
+        <Typography variant="body2" gutterBottom  component="h4">
+          {personalState.email} |{personalState.phoneNumber}
+        </Typography>
+        <Typography variant="body2" color="textSecondary" component="p">
+          {personalState.description}
+        </Typography>
+        <Box display="flex"
+          alignItems="center"
+          justifyContent="center"
+          flexWrap="nowrap"
+        >
+          <LocationIcon/>
+          <Typography variant="body2" color="textSecondary" component="p">
+            {personalState.ubication}
+          </Typography>
+        </Box>
+        <Typography gutterBottom variant="h5" component="h2">
+          {personalState.lookForAJob}
+        </Typography>
+        {visible && <InfoEditor closedComponent={toggler} Info={personalState} />}
+        {
+          isUid && <Tooltip title="Setting"  className={classes.tooltip}  >
+            <IconButton onClick={toggler}>
+              <SettingsIcon/>
+            </IconButton>
+          </Tooltip>
+        }
+      </CardContent>
+
+  }</>)
 }

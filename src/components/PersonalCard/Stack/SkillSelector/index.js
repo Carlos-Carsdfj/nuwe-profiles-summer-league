@@ -59,7 +59,8 @@ const useStyles = makeStyles((theme) => ({
     left:0,
     rigth:0,
     top:'0',
-    background: 'rgba(0,0,0,.5)'
+    background: 'rgba(0,0,0,.5)',
+    zIndex:100,
   },
   list: {
     position:'absolute',

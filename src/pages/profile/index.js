@@ -14,13 +14,12 @@ export default function Profile() {
   const isUid = checkUser(uid)
 
   useEffect(() => {
+    setChecking(true)
     dispatch(getCards(uid))
       .then(
-        
         setChecking(false)
       )
-      
-  }, [])
+  }, [isUid])
 
   return (
     <div className='profile-page'>

@@ -65,7 +65,33 @@ export const SKILLS_PACKS = [
   }
 ]
 
-export const dataStructures = ({displayName = 'anonimo', photoUrl = '', emailAddress = ''}) =>{
+
+
+
+export const TABLA_COLUMNS_STRUCTURE = [
+  { field: 'id', headerName: 'ID', width: 70, cellClassName: 'super-app-theme--cell',  },
+  { field: 'displayName', headerName: 'Nombre', cellClassName: 'super-app-theme--cell', width: 130 },
+  { field: 'email', headerName: 'Correo', cellClassName: 'super-app-theme--cell', width: 130 },
+  { field: 'ranking', headerName: 'Ranking', cellClassName: 'super-app-theme--cell', width:130}
+]
+
+
+export const structuringRows = (users = null)=>{
+  
+  if(!users){
+    return null
+  }
+ 
+  let rows = users.map(user =>{
+    return { id: user.userUid, 
+      displayName:user.displayName, 
+      email: user.emailAddress, 
+      ranking: 0 }
+  })
+  return rows
+}
+
+export const dataStructures = ({displayName = 'anonimo', photoUrl = '', emailAddress = '', uid = ''}) =>{
   const DATA_STRUCTURES = {
     docPersonal: {
       displayName:displayName,
@@ -111,6 +137,12 @@ export const dataStructures = ({displayName = 'anonimo', photoUrl = '', emailAdd
       availabilityForRemoteWork:false,
       immediateIncorporation:false
     },
+    docUserUid:{
+      displayName:displayName,
+      photoURL:photoUrl,
+      email:emailAddress,
+      userUid:uid
+    },
     docNuweCard:{
       challengePoints:'',
       topSkillScore:{},
@@ -119,7 +151,7 @@ export const dataStructures = ({displayName = 'anonimo', photoUrl = '', emailAdd
         ProblemsResolution:0,
         teamwork:0,
         creativeThinking:0
-      }
+      },
     }
   }
   return { DATA_STRUCTURES }
@@ -135,13 +167,14 @@ export const removeSkillDuplicate = (skills =[{}]) => {
     let someResult = newGroup.some(el => {
       return el && el.name === skill.name
     })
-
+    
     !someResult && newGroup.push(skill)
   })
 
   return  newGroup
-
+  
 }
+
 
 
 export const Countries = [

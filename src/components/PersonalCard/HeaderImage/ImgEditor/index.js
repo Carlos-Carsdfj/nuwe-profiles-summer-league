@@ -46,7 +46,7 @@ const useStyles = makeStyles((theme) => ({
     rigth:0,
     top:'0',
     background: 'rgba(0,0,0,.5)',
-    zIndex:5,
+    zIndex:100,
   },
 }))
 
