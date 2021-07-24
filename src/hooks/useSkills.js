@@ -1,5 +1,5 @@
 import { useEffect } from 'react'
-import { SKILLS_PACKS } from 'constSetting'
+import { removeSkillDuplicate, SKILLS_PACKS } from 'constSetting'
 import { useState } from 'react'
 
 
@@ -21,9 +21,10 @@ const useSkills = ( initialSkill = []) => {
   useEffect(() => {
     if(!(initialSkill[0] && initialSkill[0].name) ){
       setSelectedSkills(initialSkill.filter(skill =>{
-        skill.name
+        return skill.name
       }))
     }
+    
   }, [])
 
   const searchSkills = (search) =>{
@@ -35,10 +36,8 @@ const useSkills = ( initialSkill = []) => {
       return 
     }
     setSelectedSkills(prev =>{
-      let temp = prev.concat(skill)
-      return temp.filter( (toFilter, index) =>{
-        return temp.indexOf(toFilter) === index && toFilter.name
-      }) 
+      let temp = removeSkillDuplicate(prev.concat(skill))
+      return temp 
     })
   } 
   const quitSkill = (skillToQuit) => {

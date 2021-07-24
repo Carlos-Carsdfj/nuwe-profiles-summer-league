@@ -1,10 +1,10 @@
-//import { useState } from 'react'
+/* eslint-disable react/prop-types */
+import { useState } from 'react'
 import { useSelector } from 'react-redux'
-//import SkillSelector from 'components/PersonalCard/Stack/SkillSelector'
+import SkillSelector from 'components/PersonalCard/Stack/SkillSelector'
 import { makeStyles } from '@material-ui/core/styles'
 import SettingsIcon from '@material-ui/icons/Settings'
-import { Chip, Avatar, Typography, Tooltip } from '@material-ui/core'
-
+import {  Avatar, Typography, Tooltip, IconButton } from '@material-ui/core'
 
 
 const useStyles = makeStyles((theme) => ({
@@ -12,12 +12,13 @@ const useStyles = makeStyles((theme) => ({
     display:'flex',
     position:'relative',
     flexWrap:'wrap',
-    gap:'5px',
-    width:'90%',
+    gap:'20px',
+    maxWidth:'90%',
+    minWidth:'100px',
     margin:'0',
-    justifyContent: 'flex-start',
+    justifyContent: 'center',
     alignItems:'center',
-    padding: '0 10px',
+    padding: '10px 20px',
     minHeight:'50px',
     border:'1px solid ' ,
     borderColor :theme.palette.primary.main,
@@ -27,66 +28,52 @@ const useStyles = makeStyles((theme) => ({
   imageList: {
     flexWrap: 'nowrap',
     gap:'20px',
-    // Promote the list into his own layer on Chrome. This cost memory but helps keeping high FPS.
     transform: 'translateZ(0)',
     height:'50px'
+  },
 
-  },
-  text:{
-    marginLeft:'10%',
-    alignSelf:'flex-start',
-  },
   tooltip:{
     position: 'absolute',
-    top: theme.spacing(-1),
-    right: theme.spacing(-1),
+    top: theme.spacing(-2),
+    right: theme.spacing(-2),
     '&:hover':{
       cursor:'pointer',
     }
-  }
+  },
+
+
 }))
 
-export default function Stack() {
- 
-  
-  
+export default function Stack({ isUid }) {
+  const [open, setOpen] = useState(false)
   const classes = useStyles()
-  //const [ showSelect, setShowSelect ] = useState(false)
   const stackState = useSelector(state => state.personalCard.stack)
-  /* const toggleSkillSelect = () => {
-    setShowSelect(prev => !prev )
-  }*/
+  const toggleSkillSelect = () => {
+    setOpen(prev => !prev )
+  }
 
+  
 
   return(<>
-    <Typography variant="body2" gutterBottom  component="h4" className={classes.text}>
+    <Typography variant="body2" gutterBottom  component="h4" >
     Stack indicado por el usuario
     </Typography>
     <div className={classes.root}>
-      <Tooltip title="Setting" aria-label="Setting" className={classes.tooltip}>
-        <SettingsIcon/>
-      </Tooltip>
+      { 
+        isUid && <Tooltip title="Setting"  className={classes.tooltip}  >
+          <IconButton onClick={toggleSkillSelect}>
+            <SettingsIcon/>
+          </IconButton>
+        </Tooltip>
+      }
       {
         stackState && stackState.map(( skill, index ) =>{
-          return <Chip key={index} variant="outlined" avatar={<Avatar src={skill.imgUrl}  />}/> 
+          return <Avatar key={index} src={skill.imgUrl}  />
         }  
         )
       }
     </div>
+    {open && <SkillSelector closedComponent={toggleSkillSelect} skillsPack={stackState} />}
+
   </>)
-
-
-/*
-  return (
-    <>
-      <div className='stack-content' >
-        <h4>Stack indicado por el usuario </h4>
-        <div className='stack-img-content' >
-          {stackState && stackState.map(( skill,index ) => <h4 key={index}>{skill.name}</h4>)}
-        </div>
-        <button onClick={toggleSkillSelect} className='change-setting' >⚙</button>
-      </div> 
-      {showSelect && <SkillSelector closedComponent={toggleSkillSelect} skillsPack={stackState}/>}
-    </>
-  )*/
 }

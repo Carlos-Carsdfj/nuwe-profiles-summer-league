@@ -1,52 +1,154 @@
 /* eslint-disable react/prop-types */
 import { useState } from 'react'
+import { makeStyles } from '@material-ui/core/styles'
+import { Paper, 
+  Chip,
+  ButtonGroup, 
+  Button, 
+  Typography,
+  TextField,
+  InputAdornment,
+  ListItem,
+  List
+
+} from '@material-ui/core'
+
+import CreateIcon from '@material-ui/icons/Create'
 import {  useDispatch } from 'react-redux'
 import useSkills from 'hooks/useSkills'
 import { addNewStack } from 'reducer/actions'
-import './SkillSelector.css'
 
-export default function SkillSelecter({closedComponent , skillsPack}) {
-  const { skills, searchSkills, textFilter, selectedSkills, selectSkill, quitSkill } = useSkills(skillsPack)
+
+const useStyles = makeStyles((theme) => ({
+
+  root: {
+    width: '70%',
+    maxWidth: 500,
+    position:'relative',
+    textAlign:'center',
+    backgroundColor: theme.palette.background.paper,
+    borderColor:theme.palette.primary.light,
+    border: '1px solid #000',
+    borderRadius:'5px',
+    boxShadow: theme.shadows[5],
+    padding: theme.spacing(2, 4, 3),
+    
+  },
+  paper: {
+    display: 'flex',
+    position:'relative',
+    justifyContent: 'flex-start',
+    flexWrap: 'wrap',
+    listStyle: 'none',
+    padding: theme.spacing(0.5),
+    margin: 0,
+    minHeight:'50px',
+   
+  },
+  chip: {
+    margin: theme.spacing(0.5),
+  },
+  modal:{
+    display:'flex',
+    alignItems:'center',
+    justifyContent:'center',
+    height:'100vh',
+    width:'100%',
+    position:'fixed',
+    padding:0,
+    left:0,
+    rigth:0,
+    top:'0',
+    background: 'rgba(0,0,0,.5)'
+  },
+  list: {
+    position:'absolute',
+    height:'100px',
+    background:'white',
+    overflow: 'auto',
+    zIndex: 5,
+    top:'-100px',
+    left:'10px',
+    right:'10px',
+  },
+  margin: {
+    margin: theme.spacing(1),
+  },
+}))
+
+
+export default function SkillSelecter({closedComponent,skillsPack }) {
+  const classes = useStyles()
+  const {  skills,
+    quitSkill, 
+    selectedSkills, 
+    searchSkills, 
+    textFilter,
+    selectSkill
+  } = useSkills(skillsPack)
+  
   const [ visible,  setVisible ] = useState(false)
-  const styleDisplay = visible?  {display:''} : {display:'none'}
   const dispatch = useDispatch() 
   const addSkill = (selected) =>{
     selectSkill(selected)
     setVisible(false)
   }
-  const submit = (ev) => {
+  const Save = (ev) => {
     ev.preventDefault()
     dispatch(addNewStack(selectedSkills))
       .then(closedComponent())
   }
 
+
   return (
-    <div className='skill-selector-component' >
-      <button className={'close-selector-component-button'} onClick={closedComponent}>x</button>
-      <form className='skills-form' onSubmit={submit}>
-        <h2>Stack</h2>
-        <p>Aquí podrás definir tu stack de hard skills con las habilidades que utilizas frecuentemente.</p>
-        <div className='skill-selector-content'>
-          <div className='search-display' style={styleDisplay}>
+    <div className={classes.modal}  >
+      <div  className={classes.root}>
+        <Typography gutterBottom variant="h4" component="h2"  >
+        Stack
+        </Typography>
+        <Typography variant="body2" color="textSecondary" component="p"  >
+        Aquí podrás definir tu stack de hard skills con las habilidades que utilizas frecuentemente.
+        </Typography>
+        <Paper component="ul" className={classes.paper}>
+          {visible&&<List className={classes.list} >
             {
-              skills.map(( skill,index ) =>{
-                return skill && <span key={index} onClick={() => addSkill(skill)} className='search-display-item'>{skill.name}</span>
+              skills.map((skill, index )=>{
+                return <ListItem button key={index} onClick={() => addSkill(skill)} >
+                  {skill.name}
+                </ListItem>
               })
             }
-          </div>
-          <div className='selected-skills'>
-            {
-              selectedSkills.map(( skill, index )=>{
-                return <div key={index}  className='selected-skills-item'>
-                  {skill.name}
-                  <span onClick={() =>quitSkill(skill) } className='quit-skill-button' >X</span>
-                </div>})
-            }
-            <input value={textFilter} onChange={(ev) => searchSkills(ev.target.value)} className='search-skill-input' onSelect={() =>{setVisible(true)}}  />
-          </div>
-        </div>
-        <button className='save-selector-button'>Guardar</button>
-      </form>
-    </div>
+          </List>}
+          {
+            selectedSkills.map(( skill, index )=>{
+              return <li key={index}  >
+                <Chip
+                  label={skill.name}
+                  onDelete={() =>quitSkill(skill)}
+                  className={classes.chip}
+                />
+              </li>})
+          }
+          <TextField
+            className={classes.margin}
+            InputProps={{
+              startAdornment: (
+                <InputAdornment position="start">
+                  <CreateIcon />
+                </InputAdornment>
+              ),
+            }}
+            onSelect={() =>{setVisible(true)}}
+            onChange={(ev) =>searchSkills(ev.target.value)}
+            value={textFilter}
+          />
+        </Paper>
+        <ButtonGroup variant="contained" color="primary" aria-label="contained primary button group">
+          <Button onClick={Save} >Guardar</Button>
+          
+          <Button onClick={closedComponent} >Cancelar</Button>
+        </ButtonGroup>
+      </div>
+    </div>  
   )
 }

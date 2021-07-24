@@ -22,15 +22,13 @@ const theme = createTheme({
   
 })
 ReactDOM.render(
-  <React.StrictMode>
-    <Router>
-      <Provider store={store}>
-        <ThemeProvider theme={theme}>  
-          <App />
-        </ThemeProvider>  
-      </Provider>
-    </Router>
-  </React.StrictMode>,
+  <Router>
+    <Provider store={store}>
+      <ThemeProvider theme={theme}>  
+        <App />
+      </ThemeProvider>  
+    </Provider>
+  </Router>,
   document.getElementById('root'),
 )
 

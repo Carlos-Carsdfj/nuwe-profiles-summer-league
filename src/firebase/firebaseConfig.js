@@ -110,6 +110,7 @@ export const  getPublicInformation = async (uid) => {
 
 export const addPersonalCard = async ( personalCard ) => {
   const user = userAuth.currentUser
+
   const docPersonal ={
     
     ...personalCard
@@ -182,4 +183,13 @@ export const  getNuweCard = async () => {
     console.log(error)
     return false
   }
+}
+
+
+export const checkUser = (uid) =>{
+  const userUid = userAuth.currentUser.uid
+  if(userUid === uid ){
+    return true
+  } 
+  return false
 }

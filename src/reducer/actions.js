@@ -8,7 +8,7 @@ import {
   logout,
   addNewsCards
 } from 'firebase/firebaseConfig'
-
+import { removeSkillDuplicate } from 'constSetting'
 
 /*************************** */
 /**                          */
@@ -53,9 +53,22 @@ export const addNewPersonalCard = (personalCard) => {
     }
   }
 }
+export const addNewInfoPersonal = (personalCard) => {
+  return async (dispatch) => {
+    const infoUpdate = await addPersonalCard(personalCard)
+    if(infoUpdate){
+      const card = await getPersonalCard()
+      dispatch({
+        type: TYPES.ADD_NEW_PERSONAL_CARD,
+        payload:card.personalCard
+      })
+    }
+  }
+}
 export const addNewStack = (stack) => {
   return async (dispatch) => {
-    const stackUpdate = await addPersonalCard({stack})
+    const stackToAdd = removeSkillDuplicate(stack)
+    const stackUpdate = await addPersonalCard({stack:stackToAdd})
     if(stackUpdate){
       const card = await getPersonalCard()
       dispatch({
@@ -64,8 +77,6 @@ export const addNewStack = (stack) => {
       })
 
     }
-
-    
   }
 }
 /***************** */
@@ -121,6 +132,27 @@ export const getCards = (uid) => {
       dispatch({
         type: TYPES.ADD_NEW_WORK_CARD,
         payload:cards.work
+      })
+    }
+    else(
+      dispatch(addNewAllCards(uid))
+      
+    )
+  }
+}
+/***************** */
+/*************************** */
+/**                          */
+/**  Get Info Personal Card  */
+/**                          */
+/*************************** */
+export const getInfoPersonlCard = (uid) => {
+  return async (dispatch) => {
+    const cards = await getPersonalCard()
+    if(cards){
+      dispatch({
+        type: TYPES.ADD_NEW_PERSONAL_CARD,
+        payload:cards.personal
       })
     }
     else(

@@ -1,22 +1,21 @@
+/* eslint-disable react/prop-types */
 import React from 'react'
 import {
   Card, 
   CardActions,
-  CardMedia, 
-  CardContent, 
-  Typography,
   Avatar,
   Paper, 
   makeStyles,
-  Box
 } from '@material-ui/core'
-import LocationIcon from '@material-ui/icons/LocationOnOutlined'
 import { useSelector } from 'react-redux'
 import Stack from 'components/PersonalCard/Stack'
-import image from './logo512.png'
+import HeaderImage from 'components/PersonalCard/HeaderImage'
+import InfoPersonal from 'components/PersonalCard/InfoPersonal'
+
 const useStyles = makeStyles((theme) => ({
   root: {
     display: 'flex',
+    position:'relative',
     margin:theme.spacing(1),
    
   },
@@ -39,7 +38,7 @@ const useStyles = makeStyles((theme) => ({
     alignItems:'center',
   }    
 }))
-export default function PersonalCard() {
+export default function PersonalCard({ isUid }) {
   const personalState = useSelector(state => state.personalCard)
   const classes = useStyles()
   return (
@@ -48,40 +47,11 @@ export default function PersonalCard() {
     >
       <Card
       >
-        <CardMedia
-          component="img"
-          alt="A picture about some theme "
-          height="140"
-          image={image}
-          title="imagen de cabezera"
-        />
+        <HeaderImage isUid={isUid} />
         <Avatar alt="Cindy Baker" src={personalState.photoURL}  className={classes.avatar}/>
-        <CardContent className={classes.card_content} >
-          <Typography gutterBottom variant="h5" component="h2">
-            {personalState.displayName}
-          </Typography>
-          <Typography variant="body2" gutterBottom  component="h4">
-            {personalState.email} |{personalState.phoneNumber}
-          </Typography>
-          <Typography variant="body2" color="textSecondary" component="p">
-            {personalState.description}
-          </Typography>
-          <Box display="flex"
-            alignItems="center"
-            justifyContent="center"
-            flexWrap="nowrap"
-          >
-            <LocationIcon/>
-            <Typography variant="body2" color="textSecondary" component="p">
-              {personalState.ubication}
-            </Typography>
-          </Box>
-          <Typography gutterBottom variant="h5" component="h2">
-            {personalState.lookForAJob}
-          </Typography>
-        </CardContent>
+        <InfoPersonal isUid={isUid} />
         <CardActions className={classes.card_action}>
-          <Stack/>
+          <Stack isUid={isUid} />
         </CardActions>
       </Card>
     </Paper>
