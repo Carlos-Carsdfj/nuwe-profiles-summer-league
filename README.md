@@ -141,7 +141,7 @@ a demas solo los usuarios pueden modificar su respectiva collección (creada den
 hay una carpeta al que todos pueden acceder(siempre que esten autentificados) para llenar la tabla de usuarios de la app donde aparecen por Ranking
 
 
-
+### ver documentacion de estructura de datos [FIrebase](https://firebase.google.com/docs/firestore/manage-data/structure-data?authuser=0)
     
     
 
