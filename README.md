@@ -142,6 +142,11 @@ hay una carpeta al que todos pueden acceder(siempre que esten autentificados) pa
 
 
 ### ver documentacion de estructura de datos [FIrebase](https://firebase.google.com/docs/firestore/manage-data/structure-data?authuser=0)
+
+
+
+
+<img src="https://firebasestorage.googleapis.com/v0/b/first-challenge-nuwe.appspot.com/o/readmeImagenes%2Festructuradatos.png?alt=media&token=19933d4d-255c-424a-b091-8532f241eb3a" width="80%" height="auto" />
     
     
 
