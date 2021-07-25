@@ -31,7 +31,7 @@ const useSkills = ( initialSkill = []) => {
     setTextFilter(search)
   }
   const selectSkill = (skill) =>{
-    if( selectedSkills.length < 1 | selectedSkills === null){
+    if( selectedSkills.length < 1 || selectedSkills === null){
       setSelectedSkills([skill])
       return 
     }
