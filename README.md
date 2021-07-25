@@ -25,9 +25,11 @@ Por eso proponemos las siquientes User stories a completar:
   Tecnología usada
   ---------------
  
- * ### Lenguaje
+ * ### ![#f03c15](https://via.placeholder.com/15/f03c15/000000?text=+) `#Lenguaje`
     * Javascript
- * #### Herramientas 
+    * Css
+    * Html
+ * #### ![#c5f015](https://via.placeholder.com/15/c5f015/000000?text=+) `Herramientas` 
     * **Create React App**: Ambiente de desarrollo que pre-configura un proyecto base
       para usar con las dependencias React y ReactDom.
       
@@ -35,7 +37,7 @@ Por eso proponemos las siquientes User stories a completar:
     
     * **Unsplash**: Es una api que nos permite consumir y acceder remotamente a toda la galería de fotografías de Unsplash.com. Con este puedes brindarles a tus usarios todo el repertorio de fotos para que agreguen sus covers de perfiles que tienen en tu aplicación web.
 
-* #### Dependencias 
+* #### ![#1589F0](https://via.placeholder.com/15/1589F0/000000?text=+) `Dependencias` 
     * **Material-ui/core**: Proporciona una serie de componentes para React js, agilizando el desarrollo 
 del diseño de interfaz de usuario así como algunos otros componentes que facilitan algunos comportamientos extensos o repetitivo en material de código.
 
@@ -123,4 +125,4 @@ del diseño de interfaz de usuario así como algunos otros componentes que facil
 
 
 ### [Sonarcloud](https://sonarcloud.io/dashboard?id=Carlos-Carsdfj_nuwe-profiles-summer-league)
-  <img src="https://firebasestorage.googleapis.com/v0/b/first-challenge-nuwe.appspot.com/o/readmeImagenes%2Fsoarcloud.png?alt=media&token=824f16de-6e44-40bb-a681-d2fecde66e80" width="80%" height="auto" />
+  <img src="https://firebasestorage.googleapis.com/v0/b/first-challenge-nuwe.appspot.com/o/readmeImagenes%2Fsoarcloud.png?alt=media&token=824f16de-6e44-40bb-a681-d2fecde66e80" width="400" height="auto" />
