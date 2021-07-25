@@ -125,4 +125,4 @@ del diseño de interfaz de usuario así como algunos otros componentes que facil
 
 
 ### [Sonarcloud](https://sonarcloud.io/dashboard?id=Carlos-Carsdfj_nuwe-profiles-summer-league)
-  <img src="https://firebasestorage.googleapis.com/v0/b/first-challenge-nuwe.appspot.com/o/readmeImagenes%2Fsoarcloud.png?alt=media&token=824f16de-6e44-40bb-a681-d2fecde66e80" width="400" height="auto" />
+
