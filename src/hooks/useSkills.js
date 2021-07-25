@@ -1,6 +1,6 @@
-import { useEffect } from 'react'
+import { useEffect, useState } from 'react'
 import { removeSkillDuplicate, SKILLS_PACKS } from 'constSetting'
-import { useState } from 'react'
+
 
 
 const useSkills = ( initialSkill = []) => {
