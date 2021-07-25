@@ -134,7 +134,12 @@ del diseño de interfaz de usuario así como algunos otros componentes que facil
 
 
 <img src="https://firebasestorage.googleapis.com/v0/b/first-challenge-nuwe.appspot.com/o/readmeImagenes%2Ffirebase.png?alt=media&token=2811ca89-5d91-4a80-94d8-48f301b175ab" width="80%" height="auto" />
-Las reglas 
+Las reglas estas establecidad de tal forma que solo los usuarios puedan leer la informacion de la base de datos 
+
+a demas solo los usuarios pueden modificar su respectiva collección (creada dentro de otro doc) que coincide con el usuario que hace la solicitud
+
+hay una carpeta al que todos pueden acceder(siempre que esten autentificados) para llenar la tabla de usuarios de la app donde aparecen por Ranking
+
 
 
     
