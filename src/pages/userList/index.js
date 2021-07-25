@@ -37,7 +37,6 @@ export default function UserList() {
     getAlluser()
       .then(users=>{
         users && setUsers(users)
-        console.log(users)
         setChecking(false)
       })
   }, [])
