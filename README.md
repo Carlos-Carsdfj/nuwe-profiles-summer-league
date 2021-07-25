@@ -126,3 +126,17 @@ del diseño de interfaz de usuario así como algunos otros componentes que facil
 
 ### [Sonarcloud](https://sonarcloud.io/dashboard?id=Carlos-Carsdfj_nuwe-profiles-summer-league)
 
+
+
+
+
+### <img src="https://firebasestorage.googleapis.com/v0/b/first-challenge-nuwe.appspot.com/o/readmeImagenes%2Ffirebase.svg?alt=media&token=ffb3cecf-5bd3-4766-94e0-a29bfcbc0e3f" width="50" height="50" />  Firebase
+
+
+<img src="https://firebasestorage.googleapis.com/v0/b/first-challenge-nuwe.appspot.com/o/readmeImagenes%2Ffirebase.png?alt=media&token=2811ca89-5d91-4a80-94d8-48f301b175ab" width="80%" height="auto" />
+Las reglas 
+
+
+    
+    
+
