@@ -22,8 +22,49 @@ Por eso proponemos las siquientes User stories a completar:
 
 ## Solución  al desafío 
 
-*Tecnología usada*
+  Tecnología usada
+  ---------------
+ 
+ * ### Lenguaje
+    * Javascript
+ * #### Herramientas 
+    * **Create React App**: Ambiente de desarrollo que pre-configura un proyecto base
+      para usar con las dependencias React y ReactDom.
+      
+    * **Firebase**: ramework serveless.
+    
+    * **Unsplash**: Es una api que nos permite consumir y acceder remotamente a toda la galería de fotografías de Unsplash.com. Con este puedes brindarles a tus usarios todo el repertorio de fotos para que agreguen sus covers de perfiles que tienen en tu aplicación web.
 
+* #### Dependencias 
+    * **Material-ui/core**: Proporciona una serie de componentes para React js, agilizando el desarrollo 
+del diseño de interfaz de usuario así como algunos otros componentes que facilitan algunos comportamientos extensos o repetitivo en material de código.
+
+   * **Material-ui/icons**: Nos provee de todos los iconos que ofrece  **Material**.
+
+   * **Material-ui/lab**: Este paquete aloja componentes en incubación que todavía no están listos para estar en core, pero que esto no te asuste lo que significa es que sigue un movimiento de cambio mas repentino que los paquetes de core pude contener herramientas muy interesante como el Auto completado de campo de texto.  
+   * **Material-ui/styles**: Solución de estilos de Material-ui puede ser usado con cualquier
+          componente de React aún si no se esta utilizando material-ui/core en el 
+          proyecto.  
+   
+   * **Firebase**: Es nuestro SDK para comunicarnos con nuestro proyecto creado en firebase, poder usar la autentificación y la base de datos que dicho servelessnos provee. 
+   
+   *  **React-firebaseui**: Proporciona componentes que maneja un flujo de UI para iniciar sesión , nos ayuda a no tener que construir desde cero dicho sistema de interfaz de usuario , esta construida sobre firebase-auth.
+
+   * **Redux**:Contenedor predecible del estado de aplicaciones JavaScript.corren en distintos ambientes (cliente, servidor y nativo), y son fáciles de probar. Además de eso, provee una gran experiencia de desarrollo, gracias a 
+          edición en vivo combinado con un depurador sobre una línea de tiempo.  
+
+   * **React-redux**:Este paquete contiene una serie de hooks y funciones que nos facilita la 
+          integración  mantenimiento de Redux para proyecto realizados con React.
+          
+   * **Redux-thunk**: Permite escribir creadores de acciones que retornan una función en vez de un objeto de acción típico.  Puede ser usado para retrasar el envío de una acción hasta que se cumpla una línea de código asíncrona.
+   
+   * **React-router-dom**: Colección de componentes de navegación para usar en Reac, con esta librería
+          podemos obtener un enrutamiento dinámico es la magia por así decirlo que nos permite también renderizar componentes mediante rutas        
+ 
+ 
+ 
+
+## Directorio en arbol  del proyecto
 ```
 ├── jsconfig.json
 ├── package.json
