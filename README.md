@@ -145,8 +145,11 @@ hay una carpeta al que todos pueden acceder(siempre que esten autentificados) pa
 
 
 
-
 <img src="https://firebasestorage.googleapis.com/v0/b/first-challenge-nuwe.appspot.com/o/readmeImagenes%2Festructuradatos.png?alt=media&token=19933d4d-255c-424a-b091-8532f241eb3a" width="80%" height="auto" />
     
+ 
+ De la misma forma tambien se aprovecho el servicio de store que ofrece firebase para alojar las imagenes de los skills 
+ <img src="https://firebasestorage.googleapis.com/v0/b/first-challenge-nuwe.appspot.com/o/readmeImagenes%2Fstorage.png?alt=media&token=4bbf5ed0-3275-4bd1-86af-1529ab167f19" width="80%" height="auto" />
+ Así esta todo en un mismo lugar 
     
 
