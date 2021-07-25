@@ -61,7 +61,8 @@ del diseño de interfaz de usuario así como algunos otros componentes que facil
    * **React-router-dom**: Colección de componentes de navegación para usar en Reac, con esta librería
           podemos obtener un enrutamiento dinámico es la magia por así decirlo que nos permite también renderizar componentes mediante rutas        
  
- 
+
+    
  
 
 ## Directorio en arbol  del proyecto
@@ -108,3 +109,9 @@ del diseño de interfaz de usuario así como algunos otros componentes que facil
 │   └── setupTests.js
 └── yarn.lock
 ```
+
+
+
+ <img src="https://firebasestorage.googleapis.com/v0/b/first-challenge-nuwe.appspot.com/o/readmeImagenes%2Fbuscar.svg?alt=media&token=9129a939-ecd5-4e3a-bfa7-ec8d028598dd" width="200" height="200" />
+ 
+ ## Calidad del codigo
