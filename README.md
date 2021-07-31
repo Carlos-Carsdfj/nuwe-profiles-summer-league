@@ -62,12 +62,7 @@ del diseño de interfaz de usuario así como algunos otros componentes que facil
    
    * **React-router-dom**: Colección de componentes de navegación para usar en Reac, con esta librería
           podemos obtener un enrutamiento dinámico es la magia por así decirlo que nos permite también renderizar componentes mediante rutas      
-   * **React-qr-code**: Nos prevee de un componente que genera codigo QR con un valor previamente indicado.
 
-   * **React-robohash**:Se encarga de recibir una imagen (Avatar) generado de forma automatica por la api proporcionado por [robohash](https://robohash.org)      
- 
-
-    
  
 
 ## Directorio en arbol  del proyecto
